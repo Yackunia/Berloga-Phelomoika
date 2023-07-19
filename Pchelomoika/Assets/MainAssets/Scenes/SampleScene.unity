@@ -1088,11 +1088,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2256111138976354074, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.5
+      value: -50.46
       objectReference: {fileID: 0}
     - target: {fileID: 2256111138976354074, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.39
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 2256111138976354074, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1127,6 +1127,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2256111138976354077, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
+      propertyPath: health
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256111138976354077, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
       propertyPath: hitZone
       value: 
       objectReference: {fileID: 1693342987}
@@ -1142,6 +1146,10 @@ PrefabInstance:
       propertyPath: particle
       value: 
       objectReference: {fileID: 2007286756}
+    - target: {fileID: 2256111138976354078, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
+      propertyPath: damageValue
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2256111138976354144, guid: feb3c96365ef0b649b703b4f431c46fa, type: 3}
       propertyPath: m_Name
       value: BUG
@@ -1155,6 +1163,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2310891372142467011, guid: e8fa8677b3233984f8dbde1ecc55d384, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -51.30005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310891373557149232, guid: e8fa8677b3233984f8dbde1ecc55d384, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310891373557149232, guid: e8fa8677b3233984f8dbde1ecc55d384, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310891373557149234, guid: e8fa8677b3233984f8dbde1ecc55d384, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2310891373737130905, guid: e8fa8677b3233984f8dbde1ecc55d384, type: 3}
       propertyPath: m_Name
       value: Bear

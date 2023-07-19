@@ -62,7 +62,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -55.5, y: -2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 603630973078182226}
   - {fileID: 2256111139373464696}
@@ -122,7 +122,7 @@ MonoBehaviour:
   isGismos: 1
   isIdle: 1
   isRight: 0
-  chaseSpeed: 5
+  chaseSpeed: 4
   patroolSpeed: 2
   drawObject: {fileID: 603630973078182226}
   targetLayer:
