@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - DestrObj
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Player
+  - Enemy
+  - EnemeCanCol
+  - DestrObjCanColl
+  - Platform
+  - SmartEnemy
+  - SmartEnemyCanHurt
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 337281547
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 2274701553
+    locked: 0
+  - name: BackSprites
+    uniqueID: 1423234407
+    locked: 0
+  - name: Enemys
+    uniqueID: 1063843891
+    locked: 0
+  - name: Player
+    uniqueID: 3949390705
+    locked: 0
+  - name: ForeSprites
+    uniqueID: 2933261845
+    locked: 0
+  - name: ForeGround
+    uniqueID: 2333380085
+    locked: 0
+  - name: HUD
+    uniqueID: 1667237829
+    locked: 0
