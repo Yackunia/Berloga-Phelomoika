@@ -12,8 +12,10 @@ public class EnemyS : MonoBehaviour
     private bool canSeeTarget;
     private bool canRun = true;
     private bool canFlip = true;
+    private bool idleArchive;
 
-    private int currentDirection = 1;
+
+    [SerializeField] private int currentDirection = 1;
 
     private float spawnPoint;
 
@@ -23,6 +25,7 @@ public class EnemyS : MonoBehaviour
 
     [SerializeField] private bool isIdle;
     [SerializeField] private bool isRight;
+    [SerializeField] private bool isWallMove;
 
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float patroolSpeed;
@@ -62,6 +65,8 @@ public class EnemyS : MonoBehaviour
     [SerializeField] private HitZone hitZone;
 
     [SerializeField] private Transform healthFieldDrawable;
+
+    [SerializeField] private SpriteRenderer[] sprites;
 
     [Header("Effects and Audio")]
     //Audio, Blood, Drop and other effects
@@ -109,6 +114,7 @@ public class EnemyS : MonoBehaviour
     {
         spawnPoint = transform.position.x; //set center point for patrool mechanic
         healthMax = health;
+        idleArchive = isIdle;
     }
 
     #endregion
@@ -145,7 +151,7 @@ public class EnemyS : MonoBehaviour
             if (col.transform != transform)
             {
                 target = col.transform;
-
+ 
                 break;
             }
         }
@@ -161,6 +167,8 @@ public class EnemyS : MonoBehaviour
                 break;
             }
         }
+
+        Debug.Log(name + "заагрился на " + target.name);
     }
 
     protected virtual void UpdAnim()
@@ -232,6 +240,8 @@ public class EnemyS : MonoBehaviour
     }
     protected virtual void Damage(float damage)
     {
+        StartFight();
+
         StopEnemy();
 
         DamageCalculation(damage);
@@ -239,8 +249,6 @@ public class EnemyS : MonoBehaviour
         KnockEffect(damage);
         //BloodEffect();
         DamageSoundEffect();
-
-        StartFight();
     }
 
     private void DamageCalculation(float damage)
@@ -268,14 +276,19 @@ public class EnemyS : MonoBehaviour
 
         canv.SetActive(false);
 
-        rb.velocity = new Vector2(0f, rb.velocity.y);
+        //rb.velocity = new Vector2(0f, rb.velocity.y);
         //gameObject.layer = 10;
 
         Destroy(this);
 
-        Destroy(hitZone);
-
         CheckDeadHitBox();
+
+        for(int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].sortingLayerName = "HUD";
+        }
+
+        gameObject.layer = 10;
     }
     protected void CheckDeadHitBox()
     {
@@ -299,6 +312,8 @@ public class EnemyS : MonoBehaviour
 
         if (isAlive)
             rb.velocity = new Vector2(knockSpeedX, knockSpeedY);
+        else
+            rb.velocity = new Vector2(knockSpeedX*1.2f, knockSpeedY*1.8f);
     }
 
     private void DamageSoundEffect()
@@ -332,8 +347,10 @@ public class EnemyS : MonoBehaviour
         StopEnemy();
         UnFreezeEnemy();
         seeTarget = false;
-        //isIdle = true;
+        isIdle = idleArchive;
         rb.velocity = Vector2.zero;
+
+        Debug.Log("Stop" + name);
     }
     #endregion
 

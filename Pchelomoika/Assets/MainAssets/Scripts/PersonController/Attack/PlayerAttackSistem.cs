@@ -12,6 +12,7 @@ public class PlayerAttackSistem : MonoBehaviour
     [SerializeField] private AudioSource block;
 
     private bool isInput;
+    private bool canInput = true;
 
     [Header("Combat")]
     public bool isCombat;
@@ -63,7 +64,11 @@ public class PlayerAttackSistem : MonoBehaviour
 
     public void StartInput()
     {
-        isInput = true;
+        if (canInput) 
+        { 
+            isInput = true; 
+            canInput = false;
+        }
     }
 
 
@@ -90,6 +95,13 @@ public class PlayerAttackSistem : MonoBehaviour
         move.wall.EnableClimb();
         move.wall.EnableWall();
         move.dash.EnableDash();
+
+        Invoke("CanInput", .2f);
+    }
+
+    private void CanInput()
+    {
+        canInput = true; 
     }
 
     private void EndPain()
@@ -109,6 +121,8 @@ public class PlayerAttackSistem : MonoBehaviour
         move.wall.isFalling = true;
 
         plHealth.canHurt = true;
+
+        Invoke("CanInput", .1f);
     }
 
     public void DisableCombat()

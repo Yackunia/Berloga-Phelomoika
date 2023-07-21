@@ -64,6 +64,7 @@ public class DestrObj : MonoBehaviour
 		{
 			Destroy(gameObject);
 
+			deadPart.gameObject.SetActive(true);
 			deadPart.parent = null;
 			deathAudio.enabled = true;
 			deathAudio.Play();
@@ -101,5 +102,6 @@ public class DestrObj : MonoBehaviour
 		shakeDuration = 0.05f;
 		Instantiate(leafParticle, transform.position, Quaternion.identity);
 		damageAudio.Play();
+		Debug.Log("damage");
 	}
 }

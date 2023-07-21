@@ -26,7 +26,6 @@ public class HitZone : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         HitCol(collision);
-        Debug.Log("12");
     }
 
     protected virtual void HitTrig(Collider2D collision)

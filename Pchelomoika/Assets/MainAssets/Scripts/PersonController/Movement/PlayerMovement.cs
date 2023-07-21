@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
         canJump = false;
         canFlip = false;
         isWalking = false;
-        stepAud.Stop();
+        stepAud.gameObject.SetActive(false);
         an.SetBool("IsWalking", isWalking);
     }
     public void SlowPlayer()
