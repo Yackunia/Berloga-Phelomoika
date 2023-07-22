@@ -277,7 +277,6 @@ public class WallSliding : MonoBehaviour
     }
     private void CheckFallGround()
     {
-        GroundDamage();
         CheckStopFall();
         CheckIsOnAir();
     }

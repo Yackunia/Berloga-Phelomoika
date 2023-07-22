@@ -18,6 +18,8 @@ public class EnemyS : MonoBehaviour
     [SerializeField] private int currentDirection = 1;
 
     private float spawnPoint;
+    private float spawnHeight;
+
 
     private Transform target;
 
@@ -25,7 +27,7 @@ public class EnemyS : MonoBehaviour
 
     [SerializeField] private bool isIdle;
     [SerializeField] private bool isRight;
-    [SerializeField] private bool isWallMove;
+    [SerializeField] private bool canWallMove;
 
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float patroolSpeed;
@@ -39,7 +41,6 @@ public class EnemyS : MonoBehaviour
     //variables required for raycasts to work
 
     [SerializeField] private float targetSeeDistance;
-    [SerializeField] private float targetSeeDistanceBack;
     [SerializeField] private float patroolDistance;
 
     [SerializeField] private Transform targetCheck;
@@ -112,7 +113,8 @@ public class EnemyS : MonoBehaviour
 
     private void SetEnemySimpleParameters()
     {
-        spawnPoint = transform.position.x; //set center point for patrool mechanic
+        spawnPoint = transform.position.x; //set center points for patrool mechanic
+        spawnHeight = transform.position.y;
         healthMax = health;
         idleArchive = isIdle;
     }
@@ -144,23 +146,11 @@ public class EnemyS : MonoBehaviour
 
     private void FindTarget()
     {
-        RaycastHit2D[] raycastHit2Ds = Physics2D.RaycastAll(targetCheck.position, transform.right, (targetSeeDistance + 1) * currentDirection, targetLayer);
+        Collider2D[] detectedObjs = Physics2D.OverlapCircleAll(targetCheck.position, (targetSeeDistance + 3f), targetLayer);
 
-        foreach (RaycastHit2D col in raycastHit2Ds)
+        foreach (Collider2D col in detectedObjs)
         {
-            if (col.transform != transform)
-            {
-                target = col.transform;
- 
-                break;
-            }
-        }
-
-        raycastHit2Ds = Physics2D.RaycastAll(targetCheck.position, transform.right, -targetSeeDistance * currentDirection,  targetLayer);
-
-        foreach (RaycastHit2D col in raycastHit2Ds)
-        {
-            if (col.transform != transform)
+            if(col.transform != transform)
             {
                 target = col.transform;
 
@@ -180,7 +170,7 @@ public class EnemyS : MonoBehaviour
     private void CheckLayerStats()
     {
         canSeeAnotherEnemy = Physics2D.Raycast(enemysCheck.position, transform.right, targetSeeDistance * currentDirection * 0.1f, anotherEnemys);
-        canSeeTarget = Physics2D.Raycast(targetCheck.position, transform.right, targetSeeDistance * currentDirection, targetLayer) && isAlive || Physics2D.Raycast(targetCheck.position, transform.right, -targetSeeDistanceBack * currentDirection, targetLayer) && isAlive;
+        canSeeTarget = Physics2D.OverlapCircle(targetCheck.position, targetSeeDistance, targetLayer);
     }
 
     #region Movement
@@ -229,8 +219,19 @@ public class EnemyS : MonoBehaviour
 
     private void Move(float speed)
     {
-        if (canRun && !canSeeAnotherEnemy) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
-        else if (canRun) rb.velocity = new Vector2(0, rb.velocity.y);
+        if (canRun && !canSeeAnotherEnemy && !seeTarget) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
+        else if (canRun && !canSeeAnotherEnemy && canWallMove) rb.velocity = (target.position - transform.position).normalized * speed;
+        else if (canRun && !canSeeAnotherEnemy) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
+        else if (canRun && canSeeAnotherEnemy) rb.velocity = Vector2.zero;
+
+        MoveToYPosition();
+    }
+
+    private void MoveToYPosition()
+    {
+        if (canRun && !seeTarget && transform.position.y > spawnHeight + 1f) rb.velocity = new Vector2(rb.velocity.x, -2f);
+        
+        if (canRun && !seeTarget && transform.position.y < spawnHeight - 1f) rb.velocity = new Vector2(rb.velocity.x, 2f);
     }
     #endregion
 
@@ -276,8 +277,7 @@ public class EnemyS : MonoBehaviour
 
         canv.SetActive(false);
 
-        //rb.velocity = new Vector2(0f, rb.velocity.y);
-        //gameObject.layer = 10;
+        rb.gravityScale = 3f;
 
         Destroy(this);
 
@@ -348,7 +348,7 @@ public class EnemyS : MonoBehaviour
         UnFreezeEnemy();
         seeTarget = false;
         isIdle = idleArchive;
-        rb.velocity = Vector2.zero;
+        //rb.velocity = Vector2.zero;
 
         Debug.Log("Stop" + name);
     }
@@ -368,9 +368,13 @@ public class EnemyS : MonoBehaviour
         canRun = true;
         canFlip = true;
 
-        rb.velocity = new Vector2(0f, rb.velocity.y);
+        //rb.velocity = new Vector2(0f, rb.velocity.y);
     }
 
+    protected void SetHealth(float hp)
+    {
+        health = hp;
+    }
 
     #endregion
 
@@ -413,22 +417,17 @@ public class EnemyS : MonoBehaviour
         if (isGismos)
         {
             Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(targetCheck.position, targetSeeDistance);
+
+            Gizmos.color = Color.red;
+
             if (!isRight)
             {
-                Gizmos.DrawLine(targetCheck.position, new Vector3(targetCheck.position.x + targetSeeDistance, targetCheck.position.y, targetCheck.position.z));
-                Gizmos.color = Color.black;
-                Gizmos.DrawLine(targetCheck.position, new Vector3(targetCheck.position.x + -targetSeeDistanceBack, targetCheck.position.y, targetCheck.position.z));
-                Gizmos.color = Color.red;
                 Gizmos.DrawLine(enemysCheck.position, new Vector3(enemysCheck.position.x + targetSeeDistance * 0.1f, enemysCheck.position.y, targetCheck.position.z));
             }
             else
             {
-                Gizmos.DrawLine(targetCheck.position, new Vector3(targetCheck.position.x - targetSeeDistance, targetCheck.position.y, targetCheck.position.z));
-                Gizmos.color = Color.black;
-                Gizmos.DrawLine(targetCheck.position, new Vector3(targetCheck.position.x + targetSeeDistanceBack, targetCheck.position.y, targetCheck.position.z));
-                Gizmos.color = Color.red;
                 Gizmos.DrawLine(enemysCheck.position, new Vector3(enemysCheck.position.x - targetSeeDistance * 0.1f, enemysCheck.position.y, targetCheck.position.z));
-
             }
 
             Gizmos.color = Color.yellow;
@@ -437,6 +436,10 @@ public class EnemyS : MonoBehaviour
                 Gizmos.DrawWireSphere(new Vector2(transform.position.x - patroolDistance, transform.position.y), 1f);
                 Gizmos.DrawWireSphere(new Vector2(transform.position.x + patroolDistance, transform.position.y), 1f);
             }
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(targetCheck.position, (targetSeeDistance + 3f));
+
         }
     }     
 }

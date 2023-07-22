@@ -97,7 +97,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isRightInput && isLeftInput || !isRightInput && !isLeftInput) movementDirection = 0;
             else if (isRightInput) movementDirection = 1;
-            else movementDirection = -1;
+            else if (isLeftInput) movementDirection = -1;
+
+            movementDirection = Input.GetAxisRaw("Horizontal");
         }
     }
 
