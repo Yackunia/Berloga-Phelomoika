@@ -104,7 +104,7 @@ public class EnemyS : MonoBehaviour
     }
 
 
-    private void SetEnemyModificators()
+    protected virtual void SetEnemyModificators()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         an = gameObject.GetComponent<Animator>();
@@ -229,9 +229,9 @@ public class EnemyS : MonoBehaviour
 
     private void MoveToYPosition()
     {
-        if (canRun && !seeTarget && transform.position.y > spawnHeight + 1f) rb.velocity = new Vector2(rb.velocity.x, -2f);
+        if (canRun && !seeTarget && transform.position.y > spawnHeight + 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, -2f);
         
-        if (canRun && !seeTarget && transform.position.y < spawnHeight - 1f) rb.velocity = new Vector2(rb.velocity.x, 2f);
+        if (canRun && !seeTarget && transform.position.y < spawnHeight - 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, 2f);
     }
     #endregion
 

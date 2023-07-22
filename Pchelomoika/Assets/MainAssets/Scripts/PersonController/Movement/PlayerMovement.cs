@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Other Scripts")]
-    public Dash dash;
     public WallSliding wall;
 
     [Header("Input")]
@@ -23,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float velocityY;
 
-    private int frontOfDirection = 1;
+    [SerializeField] private int frontOfDirection = 1;
 
     [SerializeField] private float movementSpeed;
     private float attackMovementSpeed;

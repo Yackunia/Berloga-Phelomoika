@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leafParticle: {fileID: 198341621129356860, guid: 49f24403438a4dd40ac1667165c828f5, type: 3}
   deadPart: {fileID: 6919956029348791401}
-  life: 25
+  life: 18
   damageAudio: {fileID: 6919956028269015669}
   deathAudio: {fileID: 6919956028671154792}
   isRig: 0
@@ -405,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6919956029348791401
 Transform:
   m_ObjectHideFlags: 0
@@ -460,8 +460,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2020265743
-  m_SortingLayer: 1
+  m_SortingLayerID: 1423234407
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -1292930365, guid: bd9338f045103e245886c70d2fe39830, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

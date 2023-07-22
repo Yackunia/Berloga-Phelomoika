@@ -485,7 +485,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
     m_Bits: 256
   anotherEnemys:
     serializedVersion: 2
-    m_Bits: 2112
+    m_Bits: 2048
   targetSeeDistance: 18
   patroolDistance: 5
   targetCheck: {fileID: 4758562585693287530}
@@ -633,6 +633,7 @@ MonoBehaviour:
   particle: {fileID: 0}
   painAud: {fileID: 4758562586398076507}
   deathAud: {fileID: 4758562585941317402}
+  spawner: {fileID: 0}
 --- !u!61 &4758562585969582648
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -785,7 +786,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -998,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4728349789355187034, guid: cc4533e2e380a8543aab21db1289ee31, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.0020554066
+      value: -0.0020551682
       objectReference: {fileID: 0}
     - target: {fileID: -4728349789355187034, guid: cc4533e2e380a8543aab21db1289ee31, type: 3}
       propertyPath: m_Bounds.m_Center.y
@@ -1006,7 +1007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4728349789355187034, guid: cc4533e2e380a8543aab21db1289ee31, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 1.4879456
+      value: 1.4879453
       objectReference: {fileID: 0}
     - target: {fileID: -4164210204856755369, guid: cc4533e2e380a8543aab21db1289ee31, type: 3}
       propertyPath: m_SortingLayer

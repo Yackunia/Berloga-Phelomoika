@@ -94,7 +94,6 @@ public class PlayerAttackSistem : MonoBehaviour
         move.FastPlayer();
         move.wall.EnableClimb();
         move.wall.EnableWall();
-        move.dash.EnableDash();
 
         Invoke("CanInput", .2f);
     }

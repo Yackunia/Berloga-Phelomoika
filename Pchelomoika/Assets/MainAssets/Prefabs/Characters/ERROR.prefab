@@ -342,7 +342,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -691,7 +691,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -741,10 +741,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3383399586419024898}
   - component: {fileID: 3383399586419024905}
-  - component: {fileID: 3383399586419024910}
   - component: {fileID: 3383399586419024908}
   - component: {fileID: 3383399586419024909}
   - component: {fileID: 5064977261519090190}
+  - component: {fileID: 5728854921827693081}
   m_Layer: 8
   m_Name: ERROR
   m_TagString: Enemy
@@ -792,62 +792,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3383399586419024910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383399586419024899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47683a1012c9044ab09b3526f7ff7a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGismos: 0
-  currentDirection: 1
-  isIdle: 0
-  isRight: 0
-  canWallMove: 1
-  chaseSpeed: 2
-  patroolSpeed: 1
-  drawObject: {fileID: 3383399586144378676}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 2112
-  anotherEnemys:
-    serializedVersion: 2
-    m_Bits: 256
-  targetSeeDistance: 18
-  patroolDistance: 5
-  targetCheck: {fileID: 3383399585561781764}
-  enemysCheck: {fileID: 3383399586426062625}
-  health: 500
-  knockSpeedX: 13
-  knockSpeedY: 5
-  canv: {fileID: 3383399584548564167}
-  hitZone: {fileID: 3383399586419024909}
-  healthFieldDrawable: {fileID: 3383399585007562218}
-  sprites:
-  - {fileID: 8650376828624048004}
-  - {fileID: 5302348406508208824}
-  - {fileID: 6199737066130553543}
-  - {fileID: 5875517436460437900}
-  - {fileID: 8478875001160438221}
-  - {fileID: 8704771232978492480}
-  - {fileID: 7942064819863543406}
-  - {fileID: 910211747194524542}
-  - {fileID: 7030982403526532605}
-  - {fileID: 4366817224653694703}
-  - {fileID: 6755085465754684160}
-  - {fileID: 4636173075118039423}
-  - {fileID: 4605343959527506687}
-  - {fileID: 4036755860310918127}
-  money: {fileID: 0}
-  bloodPrefs: []
-  particle: {fileID: 0}
-  painAud: {fileID: 3383399585329425049}
-  deathAud: {fileID: 3383399586298069309}
 --- !u!50 &3383399586419024908
 Rigidbody2D:
   serializedVersion: 4
@@ -885,7 +829,7 @@ MonoBehaviour:
   canHurtEnemy: 1
   canHurtPlayer: 1
   damageValue: 11
-  enemyS: {fileID: 3383399586419024910}
+  enemyS: {fileID: 0}
 --- !u!58 &5064977261519090190
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -902,6 +846,62 @@ CircleCollider2D:
   m_Offset: {x: -0.07507563, y: 0}
   serializedVersion: 2
   m_Radius: 3.0150332
+--- !u!114 &5728854921827693081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383399586419024899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68e3250d402b7e4ea8b98f6879e3ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGismos: 0
+  currentDirection: 1
+  isIdle: 1
+  isRight: 0
+  canWallMove: 1
+  chaseSpeed: 3
+  patroolSpeed: 2
+  drawObject: {fileID: 3383399586144378676}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 2112
+  anotherEnemys:
+    serializedVersion: 2
+    m_Bits: 256
+  targetSeeDistance: 15
+  patroolDistance: 5
+  targetCheck: {fileID: 3383399585561781764}
+  enemysCheck: {fileID: 3383399586426062625}
+  health: 160
+  knockSpeedX: 15
+  knockSpeedY: 7
+  canv: {fileID: 3383399584548564167}
+  hitZone: {fileID: 3383399586419024909}
+  healthFieldDrawable: {fileID: 3383399585007562218}
+  sprites:
+  - {fileID: 8650376828624048004}
+  - {fileID: 5302348406508208824}
+  - {fileID: 6199737066130553543}
+  - {fileID: 5875517436460437900}
+  - {fileID: 8478875001160438221}
+  - {fileID: 8704771232978492480}
+  - {fileID: 7942064819863543406}
+  - {fileID: 910211747194524542}
+  - {fileID: 7030982403526532605}
+  - {fileID: 4366817224653694703}
+  - {fileID: 6755085465754684160}
+  - {fileID: 4636173075118039423}
+  - {fileID: 4605343959527506687}
+  - {fileID: 4036755860310918127}
+  money: {fileID: 0}
+  bloodPrefs: []
+  particle: {fileID: 0}
+  painAud: {fileID: 3383399585329425049}
+  deathAud: {fileID: 3383399586298069309}
 --- !u!1 &3383399586426062630
 GameObject:
   m_ObjectHideFlags: 0
