@@ -19,11 +19,11 @@ public class HitZone : MonoBehaviour
     {
         move = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         HitTrig(collision);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         HitCol(collision);
     }

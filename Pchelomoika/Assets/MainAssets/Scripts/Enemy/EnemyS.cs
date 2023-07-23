@@ -8,7 +8,7 @@ public class EnemyS : MonoBehaviour
     //variables needed to implement the Movement of the enemy
 
     private bool canSeeAnotherEnemy;
-    private bool seeTarget;
+    [SerializeField] private bool seeTarget;
     private bool canSeeTarget;
     private bool canRun = true;
     private bool canFlip = true;
@@ -21,7 +21,7 @@ public class EnemyS : MonoBehaviour
     private float spawnHeight;
 
 
-    private Transform target;
+    [SerializeField] private Transform target;
 
     private Rigidbody2D rb;
 
@@ -144,7 +144,7 @@ public class EnemyS : MonoBehaviour
 
     }
 
-    private void FindTarget()
+    protected void FindTarget()
     {
         Collider2D[] detectedObjs = Physics2D.OverlapCircleAll(targetCheck.position, (targetSeeDistance + 3f), targetLayer);
 
@@ -241,8 +241,6 @@ public class EnemyS : MonoBehaviour
     }
     protected virtual void Damage(float damage)
     {
-        StartFight();
-
         StopEnemy();
 
         DamageCalculation(damage);
@@ -250,6 +248,7 @@ public class EnemyS : MonoBehaviour
         KnockEffect(damage);
         //BloodEffect();
         DamageSoundEffect();
+        if(isAlive) StartFight();
     }
 
     private void DamageCalculation(float damage)
@@ -376,6 +375,12 @@ public class EnemyS : MonoBehaviour
         health = hp;
     }
 
+    protected void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+        seeTarget = true;
+    }
+
     #endregion
 
     #region Public Variable's methods
@@ -401,7 +406,7 @@ public class EnemyS : MonoBehaviour
         return an;
     }
 
-    protected bool IsSeePlayer()
+    protected bool IsSeeTarget()
     {
         return seeTarget;
     }

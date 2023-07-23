@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
             else if (isRightInput) movementDirection = 1;
             else if (isLeftInput) movementDirection = -1;
 
-            movementDirection = Input.GetAxisRaw("Horizontal");
+            //movementDirection = Input.GetAxisRaw("Horizontal");
         }
     }
 
@@ -262,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
         canRun = true;
         canJump = true;
         canFlip = true;
+        stepAud.gameObject.SetActive(true);
     }
     public void Sitting(bool flag)
     {
