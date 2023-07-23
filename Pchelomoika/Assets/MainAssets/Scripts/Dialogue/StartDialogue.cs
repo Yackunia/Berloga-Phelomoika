@@ -44,9 +44,6 @@ public class StartDialogue : MonoBehaviour
         move.StopPlayer();
         attackSistem.DisableCombat();
         canv.SetActive(false);
-
-        Time.timeScale = 0;
-
         ConversationManager.Instance.StartConversation(conversation);
     }
 
@@ -55,9 +52,6 @@ public class StartDialogue : MonoBehaviour
         move.UnFreezePlayer();
         attackSistem.EnableCombat();
         canv.SetActive(true);
-
-        Time.timeScale = 1f;
-
         ConversationManager.Instance.EndConversation();
     }
 }
