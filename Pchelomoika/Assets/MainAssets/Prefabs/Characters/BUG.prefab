@@ -93,8 +93,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 1667237829
-  m_SortingOrder: 100
+  m_SortingLayerID: 1063843891
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3349195098606203740
 MonoBehaviour:
@@ -296,7 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGismos: 1
+  seeTarget: 0
   currentDirection: 1
+  target: {fileID: 0}
   isIdle: 0
   isRight: 0
   canWallMove: 0

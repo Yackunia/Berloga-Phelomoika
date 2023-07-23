@@ -599,7 +599,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGismos: 0
+  seeTarget: 0
   currentDirection: -1
+  target: {fileID: 0}
   isIdle: 0
   isRight: 1
   canWallMove: 1
@@ -611,7 +613,7 @@ MonoBehaviour:
     m_Bits: 256
   anotherEnemys:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   targetSeeDistance: 18
   patroolDistance: 5
   targetCheck: {fileID: 4758562585693287530}

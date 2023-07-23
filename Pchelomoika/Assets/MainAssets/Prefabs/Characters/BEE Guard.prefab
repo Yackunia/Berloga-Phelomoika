@@ -239,22 +239,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6aeb30d69a69499c44e7063d3bb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGismos: 0
+  isGismos: 1
   seeTarget: 0
   currentDirection: -1
   target: {fileID: 0}
   isIdle: 0
   isRight: 1
   canWallMove: 1
-  chaseSpeed: 8
+  chaseSpeed: 10
   patroolSpeed: 3
   drawObject: {fileID: 3981253418154708664}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 256
   anotherEnemys:
     serializedVersion: 2
-    m_Bits: 2112
+    m_Bits: 64
   targetSeeDistance: 18
   patroolDistance: 5
   targetCheck: {fileID: 2337252658851016154}
@@ -748,7 +748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2337252658502502766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.214, y: -0.08, z: 0}
+  m_LocalPosition: {x: -0.176, y: 1.066, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
