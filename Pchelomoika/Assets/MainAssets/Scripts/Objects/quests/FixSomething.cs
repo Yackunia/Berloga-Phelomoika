@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FixSomething : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> sprites;
+    [SerializeField] private GameObject sprites;
     [SerializeField] private GameObject pressButtone;
     [SerializeField] private string objectName;
 
@@ -16,7 +17,11 @@ public class FixSomething : MonoBehaviour
         if (canCheckQuestResult)
         {
             if (Input.GetKeyDown(KeyCode.E) && hasTakeThing)
-                Debug.Log("Task is completed");
+            {
+                sprites.SetActive(true);
+                gameObject.SetActive(false);
+            }
+               
             else if (Input.GetKeyDown(KeyCode.E))
                 Debug.Log("Task isn't completed");
         }
