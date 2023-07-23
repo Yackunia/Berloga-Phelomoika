@@ -30,7 +30,7 @@ public class BEE : EnemyS
         SetHealth(GetHP() - Time.deltaTime * 5f);
 
         if (GetHP() < 1) {
-            Death();
+            Damage(-10);
         }
     }
 }
