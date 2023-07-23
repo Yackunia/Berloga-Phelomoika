@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DestrObj
   - Enemy
+  - interactiveObject
   layers:
   - Default
   - TransparentFX
