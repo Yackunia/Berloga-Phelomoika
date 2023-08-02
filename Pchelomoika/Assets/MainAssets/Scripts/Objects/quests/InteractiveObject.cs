@@ -4,43 +4,25 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-    [SerializeField] private GameObject pressButtone;
     [SerializeField] private GameObject pazleQuest;
     [SerializeField] private FixSomething mainObject;
     [SerializeField] private bool pazle;
+    [SerializeField] private GameObject checkMark;
 
-    private bool canTake = false;
 
-    private void Update()
+    public void Take()
     {
-        if (canTake && Input.GetKeyDown(KeyCode.E) && !pazle)
+        if (!pazle)
         {
             mainObject.TakeSomething(gameObject);
-            pressButtone.SetActive(false);
+            checkMark.SetActive(true);
         }
-            
-        if (canTake && pazle && Input.GetKeyDown(KeyCode.E))
+
+        if (pazle)
         {
             pazleQuest.SetActive(true);
-            pressButtone.SetActive(false);
+            Time.timeScale = 0;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canTake = true;
-            pressButtone.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canTake = false;
-            pressButtone.SetActive(false);
-        }
+        Destroy(gameObject);
     }
 }

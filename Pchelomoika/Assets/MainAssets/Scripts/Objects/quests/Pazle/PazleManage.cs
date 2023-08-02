@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,14 @@ public class PazleManage : MonoBehaviour
 {
     [SerializeField] private List<Square> squares;
     private List<int> completedSquares = new List<int>();
+    private Tasks tasks;
+    [SerializeField] private GameObject checkMark;
+    private void Start()
+    {
+        tasks = GameObject.FindObjectOfType<Tasks>();
+    }
+
+    [SerializeField] private GameObject pazleEnd;
     public void CheckCompletion(int index)
     {
         var countOfCompletedSquares = 0;
@@ -25,6 +34,17 @@ public class PazleManage : MonoBehaviour
         }
 
         if (countOfCompletedSquares == squares.Count)
-            Debug.Log("вы выигнрали");
+        {
+            EndPazle();
+        }
+    }
+
+    private void EndPazle()
+    {
+        Destroy(gameObject);
+        pazleEnd.SetActive(true);
+        Time.timeScale = 1;
+        tasks.count += 1;
+        checkMark.SetActive(true);
     }
 }

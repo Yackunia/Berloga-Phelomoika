@@ -6,11 +6,16 @@ using UnityEngine;
 public class FixSomething : MonoBehaviour
 {
     [SerializeField] private GameObject sprites;
-    [SerializeField] private GameObject pressButtone;
     [SerializeField] private string objectName;
 
-    private bool hasTakeThing = false;
-    private bool canCheckQuestResult = false;
+    [SerializeField] private bool hasTakeThing = false;
+    [SerializeField] private bool canCheckQuestResult = false;
+    private Tasks tasks;
+    [SerializeField] private GameObject checkMark;
+    private void Start()
+    {
+        tasks = GameObject.FindObjectOfType<Tasks>();
+    }
 
     private void Update()
     {
@@ -37,21 +42,15 @@ public class FixSomething : MonoBehaviour
  
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Fix()
     {
-        if (collision.tag == "Player")
+        if (hasTakeThing)
         {
-            canCheckQuestResult = true;
-            pressButtone.SetActive(true);
-        }    
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canCheckQuestResult = false;
-            pressButtone.SetActive(false);
+            sprites.SetActive(true);
+            gameObject.SetActive(false);
+            Destroy(this);
+            tasks.count += 1;
+            checkMark.SetActive(true);
         }
     }
 }
