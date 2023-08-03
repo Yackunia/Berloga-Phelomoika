@@ -12521,10 +12521,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractPazle
       objectReference: {fileID: 0}
-    - target: {fileID: 2239726144936740361, guid: b43197fe718679d4d98aa25ed200f50c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2239726144936740364, guid: b43197fe718679d4d98aa25ed200f50c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -24995,14 +24991,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64eced074b3547e4ea6399f0eb221620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isProvod: 0
   st: {fileID: 0}
   end: {fileID: 0}
   tuskly: []
   yarky: []
   pushButton: {fileID: 0}
   checkMark: {fileID: 0}
-  joint: {fileID: 0}
 --- !u!4 &2081978979
 Transform:
   m_ObjectHideFlags: 0
