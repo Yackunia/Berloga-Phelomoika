@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private ProvodPhisic provod;
+
     [Header("Animation")]
     [SerializeField] private Animator an;
 
@@ -66,6 +68,8 @@ public class PlayerHealth : MonoBehaviour
             {
                 StartLowHPEffetc();
             }
+
+            provod.LoseProvod();
         }
     }
 

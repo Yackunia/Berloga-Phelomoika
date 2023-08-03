@@ -57,14 +57,14 @@ TagManager:
   - name: Enemys
     uniqueID: 1063843891
     locked: 0
-  - name: Player
-    uniqueID: 3949390705
-    locked: 0
   - name: ForeSprites
     uniqueID: 2933261845
     locked: 0
   - name: ForeGround
     uniqueID: 2333380085
+    locked: 0
+  - name: Player
+    uniqueID: 3949390705
     locked: 0
   - name: HUD
     uniqueID: 1667237829

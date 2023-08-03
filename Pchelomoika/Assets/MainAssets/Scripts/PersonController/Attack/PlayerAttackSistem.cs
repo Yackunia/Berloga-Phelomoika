@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerAttackSistem : MonoBehaviour
 {
+    [SerializeField] private ProvodPhisic provod;
     [SerializeField] private PlayerMovement move;
     [SerializeField] private PlayerHealth plHealth;
 
@@ -41,9 +42,15 @@ public class PlayerAttackSistem : MonoBehaviour
 
     private void CheckAttackInput()
     {
-        if (isInput && isCombat && !isAttacking)
+        if (isInput && isCombat && !isAttacking && !provod.ToughtProvod)
         {
             StartAttack();
+        }
+        else if (provod.ToughtProvod && isInput)
+        {
+            provod.LoseProvod();
+            isInput = false;
+            canInput = true;
         }
     }
     private void PlayAttackSound()
