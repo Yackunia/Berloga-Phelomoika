@@ -15,6 +15,8 @@ public class Provod : MonoBehaviour
     [SerializeField] private GameObject pushButton;
     [SerializeField] private GameObject checkMark;
 
+    [SerializeField] private Animator doorAnimator;
+
     [SerializeField] private FixedJoint2D joint;
 
     private Tasks tasks;
@@ -38,11 +40,11 @@ public class Provod : MonoBehaviour
 
     private void CheckCanPush()
     {
-        if (Vector2.Distance(st.position, end.position) < 3f && !isProvod && pushButton.activeSelf == false) 
+        if (Vector2.Distance(st.position, end.position) < 6f && !isProvod && pushButton.activeSelf == false) 
         {
             pushButton.SetActive(true);
         }
-        if (Vector2.Distance(st.position, end.position) >= 3f && !isProvod && pushButton.activeSelf == true)
+        if (Vector2.Distance(st.position, end.position) >= 6f && !isProvod && pushButton.activeSelf == true)
         {
             pushButton.SetActive(false);
         }
@@ -67,6 +69,8 @@ public class Provod : MonoBehaviour
 
             joint.enabled = true;
             provod.LoseProvod();
+
+            doorAnimator.Play("Open");
         }
     }
 
@@ -89,6 +93,8 @@ public class Provod : MonoBehaviour
             checkMark.SetActive(false);
 
             joint.enabled = false;
+
+            doorAnimator.Play("Close");
         }
     }
 }

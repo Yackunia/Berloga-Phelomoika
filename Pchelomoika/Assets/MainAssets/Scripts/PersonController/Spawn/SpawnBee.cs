@@ -1,34 +1,48 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 public class SpawnBee : MonoBehaviour
 {
     private bool canSpawnGuard = true;
 
     [SerializeField] private GameObject spawnBeeGuard;
 
-    [SerializeField] private Button GuardButton;
+    [SerializeField] private Animator an;
+
+    private BeeGuard guard;
 
 
     public void SpawnGuard()
     {
         if (canSpawnGuard) 
         {
-            Instantiate(spawnBeeGuard, transform.position, spawnBeeGuard.transform.rotation);
+            guard =  Instantiate(spawnBeeGuard, transform.position, spawnBeeGuard.transform.rotation).GetComponent<BeeGuard>();
+
             canSpawnGuard = false;
-            GuardButton.interactable = false;
+
+            an.Play("Guard");
         }
     }
 
     public void GuardRestoring()
     {
-        Invoke("RestoreGuard", 10f);
+        Invoke("RestoreGuard", 16f);
+
+        an.Play("Death");
     }
 
     private void RestoreGuard()
     {
         canSpawnGuard = true;
-        GuardButton.interactable = true;
+
+        an.Play("Reborn");
+    }
+
+    public void ReplaceGuard()
+    {
+        guard.transform.position = transform.position;
+        guard.SendMessage("SetTarget", transform);
+        guard.SendMessage("SetNeedToLeanBack", true);
+
+        an.Play("Replace");
     }
 
 }

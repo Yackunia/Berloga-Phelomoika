@@ -8,6 +8,7 @@ public class BeeGuard : EnemyS
     [SerializeField] private SpawnBee spawner;
     [SerializeField] private Transform plTransform;
     private float checkTimer;
+    private float timerPain;
 
     protected override void SetEnemyModificators()
     {
@@ -27,16 +28,42 @@ public class BeeGuard : EnemyS
 
     private void FollowPlayer()
     {
-        if (!IsSeeTarget()) 
+        if (!IsChasing()) 
         {
             SetTarget(plTransform);
+            SetNeedToLeanBack(true);
+            Debug.Log("BeeFreeze");
+
         }
 
+        
+
         checkTimer += Time.deltaTime;
+        if (isHearting) timerPain += Time.deltaTime;
+
+        if (timerPain > 3f)
+        {
+            if (isHearting)
+            {
+                EndPain();
+            }
+            timerPain = 0f;
+        }
+
         if (checkTimer > .5f)
         {
-            FindTarget();
+            if (isHearting)
+            {
+                EndPain();
+            }
+
             checkTimer = 0;
+            if (IsSeeTarget())
+            {
+                FindTarget();
+                SetNeedToLeanBack(false);
+                Debug.Log("BeeAttack");
+            }
         }
     }
     protected override void Death()
@@ -52,5 +79,6 @@ public class BeeGuard : EnemyS
         {
             Damage(-10);
         }
+        
     }
 }

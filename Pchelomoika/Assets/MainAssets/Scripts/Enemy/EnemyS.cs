@@ -3,27 +3,26 @@ using UnityEngine;
 public class EnemyS : MonoBehaviour
 {
     public bool isGismos;
-
     [Header("Partool / Chase")]
     //variables needed to implement the Movement of the enemy
 
     private bool canSeeAnotherEnemy;
-    [SerializeField] private bool seeTarget;
     private bool canSeeTarget;
     private bool canRun = true;
     private bool canFlip = true;
     private bool idleArchive;
 
-
-    [SerializeField] private int currentDirection = 1;
-
     private float spawnPoint;
     private float spawnHeight;
 
+    private Rigidbody2D rb;
+
+    [SerializeField] private bool isChasing;
+    [SerializeField] private bool needLeanBack = true;
+
+    [SerializeField] private int currentDirection = 1;
 
     [SerializeField] private Transform target;
-
-    private Rigidbody2D rb;
 
     [SerializeField] private bool isIdle;
     [SerializeField] private bool isRight;
@@ -53,7 +52,7 @@ public class EnemyS : MonoBehaviour
     [Header("Health System")]
     //parameters for Damage/Hill System
 
-    private bool isHearting;
+    [SerializeField] protected bool isHearting;
     private bool isAlive = true;
 
     private float healthMax;
@@ -123,7 +122,7 @@ public class EnemyS : MonoBehaviour
     private void CheckWhatToDo()
     {
         CheckIsSeePlayer();
-        if (!seeTarget) Patrol();
+        if (!isChasing) Patrol();
         else ChasePlayer();
 
         if (!isAlive) rb.velocity = new Vector2(0f, rb.velocity.y);
@@ -131,7 +130,7 @@ public class EnemyS : MonoBehaviour
 
     private void CheckIsSeePlayer()
     {
-        if (!seeTarget && canSeeTarget)
+        if (!isChasing && canSeeTarget)
         {
             StartFight();
         }
@@ -139,7 +138,7 @@ public class EnemyS : MonoBehaviour
     private void StartFight()
     {
         FindTarget();
-        seeTarget = true;
+        isChasing = true;
         isIdle = false;
 
     }
@@ -150,15 +149,13 @@ public class EnemyS : MonoBehaviour
 
         foreach (Collider2D col in detectedObjs)
         {
-            if(col.transform != transform)
+            if (col.transform != transform)
             {
                 target = col.transform;
-
+                Debug.Log(name + "заагрился на " + target.name);
                 break;
-            }
+            }          
         }
-
-        Debug.Log(name + "заагрился на " + target.name);
     }
 
     protected virtual void UpdAnim()
@@ -171,6 +168,8 @@ public class EnemyS : MonoBehaviour
     {
         canSeeAnotherEnemy = Physics2D.Raycast(enemysCheck.position, transform.right, targetSeeDistance * currentDirection * 0.1f, anotherEnemys);
         canSeeTarget = Physics2D.OverlapCircle(targetCheck.position, targetSeeDistance, targetLayer);
+
+        if (target == null && isChasing) isChasing = false;
     }
 
     #region Movement
@@ -219,19 +218,19 @@ public class EnemyS : MonoBehaviour
 
     private void Move(float speed)
     {
-        if (canRun && !canSeeAnotherEnemy && !seeTarget) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
-        else if (canRun && !canSeeAnotherEnemy && canWallMove) rb.velocity = (target.position - transform.position).normalized * speed;
-        else if (canRun && !canSeeAnotherEnemy) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
-        else if (canRun && canSeeAnotherEnemy) rb.velocity = Vector2.zero;
+        if (canRun && (!canSeeAnotherEnemy || !needLeanBack) && !isChasing) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
+        else if (canRun && (!canSeeAnotherEnemy || !needLeanBack) && canWallMove && isChasing) rb.velocity = (target.position - transform.position).normalized * speed;
+        else if (canRun && !(canSeeAnotherEnemy && needLeanBack)) rb.velocity = new Vector2(speed * currentDirection, rb.velocity.y);
+        else if (canRun && (canSeeAnotherEnemy && needLeanBack)) rb.velocity = Vector2.zero;
 
         MoveToYPosition();
     }
 
     private void MoveToYPosition()
     {
-        if (canRun && !seeTarget && transform.position.y > spawnHeight + 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, -2f);
+        if (canRun && !isChasing && transform.position.y > spawnHeight + 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, -2f);
         
-        if (canRun && !seeTarget && transform.position.y < spawnHeight - 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, 2f);
+        if (canRun && !isChasing && transform.position.y < spawnHeight - 1f && canWallMove) rb.velocity = new Vector2(rb.velocity.x, 2f);
     }
     #endregion
 
@@ -241,14 +240,17 @@ public class EnemyS : MonoBehaviour
     }
     protected virtual void Damage(float damage)
     {
-        StopEnemy();
+        if (!isHearting)
+        {
+            StopEnemy();
 
-        DamageCalculation(damage);
+            DamageCalculation(damage);
 
-        KnockEffect(damage);
-        //BloodEffect();
-        DamageSoundEffect();
-        if(isAlive) StartFight();
+            KnockEffect(damage);
+            //BloodEffect();
+            DamageSoundEffect();
+            if (isAlive) StartFight();
+        }
     }
 
     private void DamageCalculation(float damage)
@@ -345,7 +347,7 @@ public class EnemyS : MonoBehaviour
 
         StopEnemy();
         UnFreezeEnemy();
-        seeTarget = false;
+        isChasing = false;
         isIdle = idleArchive;
         //rb.velocity = Vector2.zero;
 
@@ -378,7 +380,12 @@ public class EnemyS : MonoBehaviour
     protected void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        seeTarget = true;
+        isChasing = true;
+    }
+
+    protected void SetNeedToLeanBack(bool value)
+    {
+        needLeanBack = value;
     }
 
     #endregion
@@ -406,9 +413,14 @@ public class EnemyS : MonoBehaviour
         return an;
     }
 
+    protected bool IsChasing()
+    {
+        return isChasing;
+    }
+
     protected bool IsSeeTarget()
     {
-        return seeTarget;
+        return canSeeTarget;
     }
 
     protected bool enHearting()

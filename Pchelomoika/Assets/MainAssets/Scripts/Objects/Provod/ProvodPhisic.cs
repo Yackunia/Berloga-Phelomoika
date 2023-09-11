@@ -21,6 +21,7 @@ public class ProvodPhisic : MonoBehaviour
 
     [SerializeField] private PlayerAttackSistem attack;
 
+    [SerializeField] private PlayerMovement move;
 
     private void Update()
     {
@@ -59,6 +60,8 @@ public class ProvodPhisic : MonoBehaviour
             ToughtProvod = true;
 
             podskaska.gameObject.SetActive(false);
+
+            move.jumpVelocity *= 3;
         }
         Debug.Log("2");
     }
@@ -76,6 +79,7 @@ public class ProvodPhisic : MonoBehaviour
 
             //attack.EnableCombat();
             ToughtProvod = false;
+            move.jumpVelocity /= 3;
         }
         Debug.Log("5");
     }

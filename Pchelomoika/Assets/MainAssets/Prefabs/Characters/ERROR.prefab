@@ -997,7 +997,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGismos: 0
+  isChasing: 0
+  needLeanBack: 1
   currentDirection: 1
+  target: {fileID: 0}
   isIdle: 1
   isRight: 0
   canWallMove: 1
@@ -1014,7 +1017,7 @@ MonoBehaviour:
   patroolDistance: 5
   targetCheck: {fileID: 3383399585561781764}
   enemysCheck: {fileID: 3383399586426062625}
-  health: 160
+  health: 130
   knockSpeedX: 15
   knockSpeedY: 7
   canv: {fileID: 3383399584548564167}
